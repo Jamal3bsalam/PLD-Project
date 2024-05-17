@@ -1,0 +1,90 @@
+"Name" = 'G#'
+"Author" = 'Gamal Abdelsalam Mohamed'
+"Version" = '1.0.0'
+          
+"Start Symbol" = <Program>
+               
+!Terminal...............................
+
+Id=({letter} | _) {Alphanumeric}+
+Digit=('-') {digit}+ ('.'{digit}+)? (('e')'**'{digit}+('.'{digit}+)?)? !(('e'|{digit}+)'**'{digit}+('.'{digit}+)?)?
+
+!Rules..................................     
+
+<Program> ::= Hi '{' <Statments> '}' Bye
+
+<Statments> ::= <Statment>
+             |<Statment><Statments>
+             
+<Statment> ::= <Decleration>
+         |<Assign>
+         |<My_cond>
+         |<My_loop>
+         |<My_func>
+         |<Func_call>
+
+         
+!Deleration.............................
+
+<Decleration> ::= <DT> Id
+<DT> ::= int | float | double | string
+      
+!Assign.................................
+
+<Assign> ::= <DT> Id '=' <Expr>
+<Expr> ::= <Expr> '+' <Term>
+        |<Expr> '-' <Term>
+        |<Term>
+        
+<Term> ::= <Term> '*' <Factor>
+        |<Term> '/' <Factor>
+        |<Term> '%' <Factor>
+        |<Factor>
+        
+<Factor> ::= <Factor> '**' <Exp>
+          |<Exp>
+          
+<Exp> ::= '(' <Expr> ')'
+       |<Inc>
+       |<Dec>
+       |Id
+       |Digit
+
+<Inc> ::= Id'++'
+       |'++'Id
+<Dec> ::= Id'--'
+       |'--'Id       
+!My conditional statment..................................
+
+<My_cond> ::= WHEN <Cond> '?' <Statments> '#'
+           |WHEN <Cond> '?' <Statments> '#' OTHERWISE <Statments> '#'
+         
+<Cond> ::= <Expr> <OP> <Expr>
+        
+<Op> ::= '<' | '>' | '==' | '!=' | '>=' | '<='
+
+!My loop........................................................
+      
+<My_loop> ::= UNTIL <Cond> REPEAT <Statments> '#'
+       
+!My Function..................................................
+
+<My_func> ::= <Func_name> PROC '(' <Args> ')' '->' <Statments> '#'
+           
+<Func_name> ::= Id
+        
+<Args> ::= <Arg>
+        | <Arg> ',' <Args>
+<Arg> ::= <Decleration> | Digit
+       
+!My call function............................................
+
+<Func_call> ::= <Func_name> '(' <Args> ')'
+
+
+
+
+
+
+
+
